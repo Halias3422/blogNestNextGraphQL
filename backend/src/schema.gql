@@ -1,0 +1,60 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Article {
+  id: ID!
+  title: String!
+  content: String!
+  createdAt: DateTime!
+  lastUpdatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type ArticleCreationOutput {
+  article: Article!
+}
+
+type User {
+  id: ID!
+  login: String!
+  password: DateTime!
+  createdAccountOn: DateTime!
+  articlesCreated: [Article!]!
+}
+
+type UserCreationOutput {
+  user: User!
+}
+
+type Query {
+  returnOneArticle: Article!
+  returnAllArticles: [Article!]!
+  sayHello: String!
+  returnOneUser: User!
+  returnAllUsers: [User!]!
+}
+
+type Mutation {
+  createArticle(input: ArticleCreationInput!): ArticleCreationOutput!
+  createUser(input: UserCreationInput!): UserCreationOutput!
+}
+
+input ArticleCreationInput {
+  id: ID
+  title: String!
+  content: String!
+  createdAt: DateTime
+  lastUpdatedAt: DateTime
+}
+
+input UserCreationInput {
+  id: ID
+  login: String!
+  password: String!
+  createdAccountOn: DateTime
+}
