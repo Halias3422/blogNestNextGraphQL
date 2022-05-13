@@ -1,0 +1,41 @@
+.articleListContainer {
+    display: flex;
+    flex-direction: column;
+    width: 66%;
+    margin: 0 auto;
+}
+
+.articleContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 200px;
+    min-width: 400px;
+    margin-top: 50px;
+}
+
+.textContainer {
+    width: 70%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:  ellipsis;
+}
+
+.articlePreview {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.imageContainer {
+    min-width: 200px;
+    min-height: 200px;
+    overflow: hidden;
+}
+
+.articleImage {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+
+}
