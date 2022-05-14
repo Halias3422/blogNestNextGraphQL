@@ -2,8 +2,9 @@ import { ApolloClient, ApolloQueryResult, gql, InMemoryCache } from '@apollo/cli
 import ArticleList from '../components/ArticleList'
 import IndexContent from '../components/IndexContent';
 import JoinUs from '../components/JoinUs'
+import { Article } from '../types/article';
 
-function Home( { articleList}: any)  {
+function Home({ articleList}: {articleList: Article[] })  {
   return (
     <>
       <JoinUs />
