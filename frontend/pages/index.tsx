@@ -1,12 +1,13 @@
 import { ApolloClient, ApolloQueryResult, gql, InMemoryCache } from '@apollo/client'
 import ArticleList from '../components/ArticleList'
+import IndexContent from '../components/IndexContent';
 import JoinUs from '../components/JoinUs'
 
 function Home( { articleList}: any)  {
   return (
     <>
       <JoinUs />
-      <ArticleList articleList={articleList}/>
+      <IndexContent articleList={articleList} />
     </>
   )
 }
