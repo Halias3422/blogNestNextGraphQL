@@ -1,29 +1,35 @@
-import { Field, ID, InputType, ObjectType } from "@nestjs/graphql";
-import { Article } from "../models/article.model";
+import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
+import { Article } from '../models/article.model';
 
 @InputType()
 export class ArticleCreationInput {
-    @Field(() => ID, {nullable: true})
-    id?: string;
+  @Field(() => ID, { nullable: true })
+  id?: string;
 
-    @Field(() => String)
-    title: string;
+  @Field(() => String)
+  title: string;
 
-    @Field(() => String)
-    content: string;
+  @Field(() => String)
+  description: string;
 
-    // @Field(() => User)
-    // author?: User;
+  @Field(() => String)
+  content: string;
 
-    @Field(() => Date, { nullable: true })
-    createdAt?: Date;
+  @Field(() => String)
+  image: string;
 
-    @Field(() => Date, { nullable: true })
-    lastUpdatedAt?: Date;
+  // @Field(() => User)
+  // author?: User;
+
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date;
+
+  @Field(() => Date, { nullable: true })
+  lastUpdatedAt?: Date;
 }
 
 @ObjectType()
 export class ArticleCreationOutput {
-    @Field(() => Article)
-    article: Article;
+  @Field(() => Article)
+  article: Article;
 }

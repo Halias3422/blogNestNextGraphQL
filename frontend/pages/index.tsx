@@ -1,5 +1,4 @@
-import { ApolloClient, ApolloQueryResult, gql, InMemoryCache } from '@apollo/client'
-import ArticleList from '../components/ArticleList'
+import { ApolloClient, ApolloQueryResult, gql, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
 import IndexContent from '../components/IndexContent';
 import JoinUs from '../components/JoinUs'
 import { Article } from '../types/article';
@@ -19,6 +18,15 @@ export async function getServerSideProps() {
         cache: new InMemoryCache()
     });
 
+    const articleList: Article[]  = await retreiveAllArticlesFromDB(client);
+    return {
+        props: {
+            articleList: articleList
+        }
+    }
+}
+
+async function retreiveAllArticlesFromDB(client: ApolloClient<NormalizedCacheObject>): Promise<Article[]>  {
     const { data } = await client.query({
         query: gql`
             query GetAllArticles {
@@ -31,10 +39,6 @@ export async function getServerSideProps() {
                 }
             }`
     });
-    return {
-        props: {
-            articleList: data.returnAllArticles
-        }
-    }
+    return data.returnAllArticles;
 }
 export default Home

@@ -7,7 +7,6 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ArticleModule } from './article/article.module';
-import { UserService } from './user/user.service';
 import { UserModule } from './user/user.module';
 
 @Module({
@@ -28,11 +27,11 @@ import { UserModule } from './user/user.module';
         username: configService.get('DB_USER'),
         password: configService.get('DB_PASSWORD'),
         entities: [join(__dirname, '**', '*.model.{ts,js}')],
-        synchronize: true
-      })
+        synchronize: true,
+      }),
     }),
     ArticleModule,
-    UserModule
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

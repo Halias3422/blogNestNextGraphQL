@@ -9,6 +9,6 @@ import { ArticleQueriesResolver } from './resolvers/article.queries.resolver';
 @Module({
   imports: [TypeOrmModule.forFeature([Article])],
   // controllers: [ArticleController],
-  providers: [ArticleService, ArticleQueriesResolver, ArticleMutationsResolver]
+  providers: [ArticleService, ArticleQueriesResolver, ArticleMutationsResolver],
 })
 export class ArticleModule {}
