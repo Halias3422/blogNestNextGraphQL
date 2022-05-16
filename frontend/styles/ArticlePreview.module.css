@@ -15,7 +15,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
 }
 
 .articlePreview {
@@ -31,19 +30,21 @@
 }
 
 .imageContainer {
-    min-width: 200px;
-    min-height: 150px;
+    /* min-width: 200px;
+    min-height: 100%; */
     overflow: hidden;
     margin-left: 5%;
 }
 
 .articleImage {
-    height: 150px;
-    width: 200px;
+    /* height: 150px;
+    width: 200px; */
+    max-height: 150px;
+    max-width: 200px;
     object-fit: cover;
 }
 
-.paraph {
+.description {
     color: #909090;
 }
 

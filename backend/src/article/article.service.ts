@@ -33,8 +33,7 @@ export class ArticleService {
     if (await this.checkIfArticleTableIsEmpty()) {
       const newsAPIJson = await this.fetchArticlesFromNewsAPI();
       await this.fillArticleDBWithFetchedData(newsAPIJson);
-    }
-    else {
+    } else {
       console.log('Database already filled, no need to fetch Articles');
     }
   }

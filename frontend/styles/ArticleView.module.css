@@ -36,6 +36,7 @@
 }
 
 .articleTitle {
+    text-align: justify;
 }
 
 .articleImg {
@@ -43,6 +44,14 @@
     max-width: 100%;
 }
 
+.articleDescription {
+    text-align: justify;
+    color: grey;
+    font-size: 14pt;
+}
+
 .articleContent {
+    text-align: justify;
+    font-size: 15pt;
 
 }

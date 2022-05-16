@@ -34,7 +34,7 @@ type UserCreationOutput {
 }
 
 type Query {
-  returnOneArticle: Article!
+  returnOneArticle(id: ID!): Article!
   returnAllArticles: [Article!]!
   sayHello: String!
   returnOneUser: User!

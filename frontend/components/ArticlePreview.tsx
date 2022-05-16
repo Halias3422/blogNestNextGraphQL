@@ -1,42 +1,54 @@
-import { Article } from "../types/article";
+import { Article, singleArticle } from "../types/article";
 import styles from '../styles/ArticlePreview.module.css';
 import { NextRouter, useRouter } from "next/router";
+import Image from "next/image";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 function ArticlePreview({ article, articleList }:
-     { article: Article, articleList: Article[] }) {
+    { article: Article, articleList: Article[] }) {
     const router: NextRouter = useRouter();
+    const [readableDate, setReadableDate] = useState<string>();
+
+    console.log(article.title, article.id);
+
+    useEffect(() => {
+        const articleDate = new Date(article.createdAt).toLocaleDateString('fr-FR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric'
+        });
+        setReadableDate(articleDate);
+    }, [article.createdAt]);
+
     return (
         <div className={styles.articleContainer} key={article.id} onClick={
-            () => router.push({
-                pathname: '/article/' + article.title + article.id,
+            () => 
+            router.push({
+                pathname: '/article/' + encodeURIComponent(article.title) + article.id,
                 query: {
-                    article: JSON.stringify(article),
-                    articleList: JSON.stringify(articleList)
-                }},
+                    article: article.id,
+                }
+            },
                 undefined,
                 {
-                    shallow: true
+                    shallow: false
                 })
         }>
             <div className={styles.textContainer}>
                 <h4 className={`${styles.articlePreview} ${styles.articleAuthor}`}>author name</h4>
                 <div className={styles.articleText}>
                     <h2 className={styles.articlePreview}>{article.title}</h2>
-                    <p className={`${styles.articlePreview} ${styles.paraph}`}>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                        Perferendis, optio? Minima ut recusandae magnam molestias,
-                        soluta fugit incidunt tenetur, consectetur nobis, ea cupiditate
-                        molestiae! Eaque cum cupiditate fugiat modi delectus.
-                    </p>
+                    <p className={`${styles.articlePreview} ${styles.description}`}>{article.description}</p>
                 </div>
-                <h5 className={`${styles.articlePreview} ${styles.paraph}`}>{article.createdAt.toString()}</h5>
+                <h5>{readableDate}</h5>
             </div>
             <div className={styles.imageContainer}>
-                <img className={styles.articleImage} src="https://miro.medium.com/max/1400/1*7gtWe0Tiu2jGPZ4oeNOuOA.png" />
+                <img className={styles.articleImage} src={article.image} alt="" />
             </div>
         </div>
     );
 }
-
 
 export default ArticlePreview;

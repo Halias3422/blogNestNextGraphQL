@@ -1,4 +1,4 @@
-import { Query, Resolver } from '@nestjs/graphql';
+import { Args, ID, Query, Resolver } from '@nestjs/graphql';
 import { ArticleService } from '../article.service';
 import { Article } from '../models/article.model';
 
@@ -7,7 +7,10 @@ export class ArticleQueriesResolver {
   constructor(private articleService: ArticleService) {}
 
   @Query(() => Article)
-  async returnOneArticle(articleId: Article['id']) {
+  async returnOneArticle(
+    @Args({ name: 'id', type: () => ID }) articleId: Article['id'],
+  ): Promise<Article> {
+    console.log(articleId);
     return this.articleService.findOne(articleId);
   }
 
