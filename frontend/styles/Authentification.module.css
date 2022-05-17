@@ -47,7 +47,6 @@
 .authForm {
     display: flex;
     flex-direction: column;
-    width: 33%;
     height: 400px;
     justify-content: space-evenly;
     align-items: center;
@@ -67,4 +66,8 @@
 .textForm {
     font-size: 30px;
     margin: 10px;
+}
+
+.errorMsg {
+    color: red;
 }

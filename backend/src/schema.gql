@@ -24,26 +24,24 @@ type ArticleCreationOutput {
 type User {
   id: ID!
   login: String!
+  salt: String!
   password: DateTime!
   createdAccountOn: DateTime!
   articlesCreated: [Article!]!
-}
-
-type UserCreationOutput {
-  user: User!
 }
 
 type Query {
   returnOneArticle(id: ID!): Article!
   returnAllArticles: [Article!]!
   sayHello: String!
-  returnOneUser: User!
+  returnOneUserById: User!
   returnAllUsers: [User!]!
+  findOneUserByCredentials(login: String!, password: String!): Boolean!
 }
 
 type Mutation {
   createArticle(input: ArticleCreationInput!): ArticleCreationOutput!
-  createUser(input: UserCreationInput!): UserCreationOutput!
+  createUser(input: UserCreationInput!): Boolean!
 }
 
 input ArticleCreationInput {
@@ -59,6 +57,7 @@ input ArticleCreationInput {
 input UserCreationInput {
   id: ID
   login: String!
+  salt: String
   password: String!
   createdAccountOn: DateTime
 }
