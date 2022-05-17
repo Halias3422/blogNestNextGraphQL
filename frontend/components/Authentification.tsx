@@ -49,7 +49,7 @@ function Authentification({
                 clickCount >= 2 &&
                 shown &&
                 popUp.current &&
-                !popUp.current.contains(event.target as Node) 
+                !popUp.current.contains(event.target as Node)
             ) {
                 document.body.style.overflow = "auto";
                 setShown(false);
@@ -77,16 +77,21 @@ function Authentification({
                 </div>
                 <form
                     onSubmit={async (event) =>
-                        signingUp ? setCurrProfile(await handleUserRegistration(
-                            event,
-                            setErrorSignUp,
-                            currProfile
-                        )) :
-                        setCurrProfile(await handleUserConnection(
-                            event,
-                            setErrorSignIn,
-                            currProfile
-                        ))
+                        signingUp
+                            ? setCurrProfile(
+                                  await handleUserRegistration(
+                                      event,
+                                      setErrorSignUp,
+                                      currProfile
+                                  )
+                              )
+                            : setCurrProfile(
+                                  await handleUserConnection(
+                                      event,
+                                      setErrorSignIn,
+                                      currProfile
+                                  )
+                              )
                     }
                     className={styles.authForm}
                     id="submitForm"

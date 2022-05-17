@@ -1,6 +1,12 @@
 import styles from "../styles/navBar.module.css";
 import Link from "next/link";
-import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+import {
+    Dispatch,
+    SetStateAction,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
 import Authentification from "./Authentification";
 import { CurrProfile } from "../types/currProfile";
 import { CurrProfileContext } from "../context/userContext";
@@ -19,7 +25,6 @@ function NavBar() {
         setAuthIsSignUp(false);
         setShown(!shown);
     };
-
 
     return (
         <>
@@ -40,33 +45,32 @@ function NavBar() {
                             <a className={styles.link}>About</a>
                         </Link>
                     </li>
-                    { currProfile.isLoggedIn ? 
-                    (<li className={styles.li}>
-                        <a
-                            className={styles.link}
-                            >
+                    {currProfile.isLoggedIn ? (
+                        <li className={styles.li}>
+                            <a className={styles.link}>
                                 login: {currProfile.login}
                             </a>
-                    </li>)
-                    :
-                    (<>
-                    <li className={styles.li}>
-                        <a
-                            className={styles.link}
-                            onClick={signIntoggleAuthVisibility}
-                        >
-                            Sign in
-                        </a>
-                    </li>
-                    <li className={styles.li}>
-                        <a
-                            className={`${styles.link} ${styles.getStarted}`}
-                            onClick={signUptoggleAuthVisibility}
-                        >
-                            Get started
-                        </a>
-                    </li>
-                    </>)}
+                        </li>
+                    ) : (
+                        <>
+                            <li className={styles.li}>
+                                <a
+                                    className={styles.link}
+                                    onClick={signIntoggleAuthVisibility}
+                                >
+                                    Sign in
+                                </a>
+                            </li>
+                            <li className={styles.li}>
+                                <a
+                                    className={`${styles.link} ${styles.getStarted}`}
+                                    onClick={signUptoggleAuthVisibility}
+                                >
+                                    Get started
+                                </a>
+                            </li>
+                        </>
+                    )}
                 </ul>
             </nav>
             {shown ? (
