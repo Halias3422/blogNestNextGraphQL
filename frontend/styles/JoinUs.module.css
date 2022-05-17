@@ -11,6 +11,7 @@
     min-height: 454px;
     overflow-y:visible;
     height: auto;
+    padding-top: 75px;
 }
 
 .textContainer {
