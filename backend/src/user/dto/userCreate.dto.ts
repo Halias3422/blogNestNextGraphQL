@@ -24,7 +24,7 @@ export class UserCreationInput {
 }
 
 @ObjectType()
-export class UserCreationOutput {
-  @Field(() => User, { nullable: true })
-  user?: User;
+export class UserOutput {
+  @Field(() => String, { nullable: true })
+  login: string;
 }

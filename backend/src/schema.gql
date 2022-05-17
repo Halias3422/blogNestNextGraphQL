@@ -30,18 +30,22 @@ type User {
   articlesCreated: [Article!]!
 }
 
+type UserOutput {
+  login: String
+}
+
 type Query {
   returnOneArticle(id: ID!): Article!
   returnAllArticles: [Article!]!
   sayHello: String!
   returnOneUserById: User!
   returnAllUsers: [User!]!
-  findOneUserByCredentials(login: String!, password: String!): Boolean!
+  findOneUserByCredentials(login: String!, password: String!): UserOutput!
 }
 
 type Mutation {
   createArticle(input: ArticleCreationInput!): ArticleCreationOutput!
-  createUser(input: UserCreationInput!): Boolean!
+  createUser(input: UserCreationInput!): UserOutput!
 }
 
 input ArticleCreationInput {
