@@ -7,9 +7,13 @@
     padding-left: 17%;
     padding-right: 17%;
     border-bottom: black solid 1px;
+    position: fixed;
+    box-sizing: border-box;
+    width: 100%;
+    justify-content: space-between;
 }
 
-.ul {
+ .ul {
     flex: 1 1 auto;
     list-style-type: none;
     display: flex;
@@ -26,6 +30,7 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-decoration: none;
     color: #323028;
+    cursor: pointer;
 }
 
 .title {
@@ -43,4 +48,5 @@
     padding-left: 16px;
     padding-right: 16px;
     color: #ffffff;
-}
+    cursor: pointer;
+} 

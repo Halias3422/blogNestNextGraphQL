@@ -2,7 +2,7 @@ import { Article } from '../../types/article'
 import styles from '../../styles/ArticleView.module.css'
 import ArticleList from "../../components/ArticleList";
 import { apiClient } from '../_app';
-import { retreiveAllArticlesFromDB, retreiveArticleFromId } from '../api/retreiveArticles';
+import { retreiveAllArticlesFromDB, retreiveArticleFromId } from '../../dbLogic/retreiveArticles';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
@@ -10,7 +10,6 @@ function ArticleView({ article, articleList }:
     { article: Article, articleList: Article[] }) {
     const [readableDate, setReadableDate] = useState<string>();
     const router = useRouter();
-    console.log('router', router.query);
 
     useEffect(() => {
         const articleDate = new Date(article.createdAt).toLocaleDateString('fr-FR', {
@@ -60,11 +59,9 @@ function selectFourFirstArticles(articleList: Article[]): Article[] {
 }
 
 export async function getServerSideProps(context: any) {
-    console.log('serverside');
     const query = context.query;
     const article: Article = await retreiveArticleFromId(query['article'] as string, apiClient);
     const articleList: Article[] = await retreiveAllArticlesFromDB(apiClient);
-    console.log('article' + article.title);
     return {
         props: {
             article,

@@ -9,8 +9,6 @@ function ArticlePreview({ article, articleList }:
     const router: NextRouter = useRouter();
     const [readableDate, setReadableDate] = useState<string>();
 
-    console.log(article.title, article.id);
-
     useEffect(() => {
         const articleDate = new Date(article.createdAt).toLocaleDateString('fr-FR', {
             year: 'numeric',

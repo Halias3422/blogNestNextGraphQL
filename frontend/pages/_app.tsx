@@ -5,8 +5,10 @@ import NavBar from '../components/NavBar'
 import { useState } from 'react';
 import { Article, singleArticle } from '../types/article';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { assertInputObjectType } from 'graphql';
 
 function MyApp({ Component, pageProps }: AppProps) {
+
   return (
     <>
       <MyHead />

@@ -10,7 +10,6 @@ export class ArticleQueriesResolver {
   async returnOneArticle(
     @Args({ name: 'id', type: () => ID }) articleId: Article['id'],
   ): Promise<Article> {
-    console.log(articleId);
     return this.articleService.findOne(articleId);
   }
 

@@ -1,5 +1,5 @@
 import { ApolloClient, gql, NormalizedCacheObject } from "@apollo/client";
-import { Article } from "../../types/article";
+import { Article } from "../types/article";
 
 export async function retreiveAllArticlesFromDB(client: ApolloClient<NormalizedCacheObject>): Promise<Article[]>  {
     const { data } = await client.query({
