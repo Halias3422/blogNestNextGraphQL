@@ -8,6 +8,7 @@ import { CurrProfileContext } from "../context/userContext";
 function NavBar() {
     const [shown, setShown] = useState(false);
     const [authIsSignUp, setAuthIsSignUp] = useState(true);
+    const [currProfile, setCurrProfile] = useContext(CurrProfileContext);
 
     const signUptoggleAuthVisibility = () => {
         setAuthIsSignUp(true);
@@ -39,6 +40,16 @@ function NavBar() {
                             <a className={styles.link}>About</a>
                         </Link>
                     </li>
+                    { currProfile.isLoggedIn ? 
+                    (<li className={styles.li}>
+                        <a
+                            className={styles.link}
+                            >
+                                login: {currProfile.login}
+                            </a>
+                    </li>)
+                    :
+                    (<>
                     <li className={styles.li}>
                         <a
                             className={styles.link}
@@ -55,6 +66,7 @@ function NavBar() {
                             Get started
                         </a>
                     </li>
+                    </>)}
                 </ul>
             </nav>
             {shown ? (

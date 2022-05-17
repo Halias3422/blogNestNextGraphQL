@@ -63,7 +63,6 @@ const setNewCurrProfile = (responseAPI: UserLogin, currProfile: CurrProfile) => 
     const loggedInProfile: CurrProfile = {
         isLoggedIn: true,
         login: responseAPI.login,
-        setContext: currProfile.setContext
     }
     return loggedInProfile;
 }

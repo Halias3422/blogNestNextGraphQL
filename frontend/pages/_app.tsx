@@ -11,20 +11,13 @@ function MyApp({ Component, pageProps }: AppProps) {
     const currProfileEmpty: CurrProfile = {
         isLoggedIn: false,
         login: null,
-        setContext: (): void => {},
     };
-
     const [currProfile, setCurrProfile] = useState(currProfileEmpty);
-    const currProfileFilled: CurrProfile = {
-        isLoggedIn: false,
-        login: null,
-        setContext: setCurrProfile,
-    };
 
     return (
         <>
             <MyHead />
-            <CurrProfileContext.Provider value={currProfileFilled}>
+            <CurrProfileContext.Provider value={[currProfile, setCurrProfile]}>
                 <NavBar />
                 <Component {...pageProps} />
             </CurrProfileContext.Provider>

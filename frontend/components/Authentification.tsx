@@ -25,7 +25,7 @@ function Authentification({
     shown: boolean;
     setShown: Dispatch<SetStateAction<boolean>>;
 }) {
-    const currProfile: CurrProfile = useContext(CurrProfileContext);
+    const [currProfile, setCurrProfile] = useContext(CurrProfileContext);
     console.log("DEBUT CURR PROFILE = ", currProfile);
     let contextText: string = "Sign Up";
     let clickCount: number = 0;
@@ -49,8 +49,7 @@ function Authentification({
                 clickCount >= 2 &&
                 shown &&
                 popUp.current &&
-                !popUp.current.contains(event.target as Node) /*||
-                currProfile.isLoggedIn*/
+                !popUp.current.contains(event.target as Node) 
             ) {
                 document.body.style.overflow = "auto";
                 setShown(false);
@@ -78,22 +77,16 @@ function Authentification({
                 </div>
                 <form
                     onSubmit={async (event) =>
-                        currProfile && currProfile.setContext && signingUp
-                                ? currProfile.setContext(
-                                      await handleUserRegistration(
-                                          event,
-                                          setErrorSignUp,
-                                          currProfile
-                                      )
-                                  )
-                                : (currProfile && currProfile.setContext ? currProfile.setContext(
-                                      await handleUserConnection(
-                                          event,
-                                          setErrorSignIn,
-                                          currProfile
-                                      )
-                                  )
-                            : null)
+                        signingUp ? setCurrProfile(await handleUserRegistration(
+                            event,
+                            setErrorSignUp,
+                            currProfile
+                        )) :
+                        setCurrProfile(await handleUserConnection(
+                            event,
+                            setErrorSignIn,
+                            currProfile
+                        ))
                     }
                     className={styles.authForm}
                     id="submitForm"
