@@ -35,12 +35,12 @@ function ArticlePreview({ article, articleList }:
                 })
         }>
             <div className={styles.textContainer}>
-                <h4 className={`${styles.articlePreview} ${styles.articleAuthor}`}>author name</h4>
+                <h4 className={styles.articleAuthor}>author name</h4>
                 <div className={styles.articleText}>
-                    <h2 className={styles.articlePreview}>{article.title}</h2>
+                    <h2 className={`${styles.articlePreview} ${styles.articleTitle}`}>{article.title}</h2>
                     <p className={`${styles.articlePreview} ${styles.description}`}>{article.description}</p>
                 </div>
-                <h5>{readableDate}</h5>
+                <h5 className={styles.articlePreview}>{readableDate}</h5>
             </div>
             <div className={styles.imageContainer}>
                 <img className={styles.articleImage} src={article.image} alt="" />
