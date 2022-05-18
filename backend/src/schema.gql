@@ -18,7 +18,7 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type ArticleCreationOutput {
-  article: Article!
+  articleCreated: Boolean!
 }
 
 type User {
@@ -40,7 +40,7 @@ type Query {
   returnAllArticles: [Article!]!
   sayHello: String!
   returnOneUserById: User!
-  returnAllUsers: [User!]!
+  returnAllUsers: [UserOutput!]!
   findOneUserByCredentials(login: String!, password: String!): UserOutput!
 }
 

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { pbkdf2Sync, randomBytes } from 'crypto';
 import { Repository } from 'typeorm';
-import { UserCreationInput } from './dto/userCreate.dto';
+import { UserCreationInput, UserOutput } from './dto/userCreate.dto';
 import { User } from './models/user.model';
 
 @Injectable()
@@ -13,7 +13,17 @@ export class UserService {
     ) {}
 
     async findAll() {
-        return await this.userRepository.find();
+        const usersSafeOutput: UserOutput[] = [];
+        const users = await this.userRepository.find();
+        users.forEach((user) => {
+            const userOutput: UserOutput = {
+                login: user.login,
+                id: user.id,
+            };
+            usersSafeOutput.push(userOutput);
+        });
+        console.log('userOutput', usersSafeOutput);
+        return usersSafeOutput;
     }
 
     async findOneById(userId: User['id']) {

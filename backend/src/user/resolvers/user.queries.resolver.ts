@@ -12,7 +12,7 @@ export class UserQueriesResolver {
         return await this.userService.findOneById(userId);
     }
 
-    @Query(() => [User])
+    @Query(() => [UserOutput])
     async returnAllUsers() {
         return this.userService.findAll();
     }

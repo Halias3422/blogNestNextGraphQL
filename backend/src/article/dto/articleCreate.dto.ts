@@ -30,6 +30,6 @@ export class ArticleCreationInput {
 
 @ObjectType()
 export class ArticleCreationOutput {
-  @Field(() => Article)
-  article: Article;
+  @Field(() => Boolean)
+  articleCreated: boolean;
 }

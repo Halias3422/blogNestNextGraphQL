@@ -21,8 +21,8 @@ function Home({ articleList }: { articleList: Article[] }) {
     useEffect(() => {
         if (currProfile && currProfile.isLoggedIn) {
             setViewJoinUs(false);
-            setRender(true);
         }
+        setRender(true);
     }, [setViewJoinUs, currProfile]);
     return (
         <>
