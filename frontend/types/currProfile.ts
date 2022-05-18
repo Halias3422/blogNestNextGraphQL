@@ -3,5 +3,6 @@ import { ConnectedUser } from "./user"
 
 export type CurrProfile = {
     isLoggedIn: boolean,
-    login : string | null,
+    login: string | null,
+    id : string | null,
 }

@@ -10,20 +10,21 @@ import {
 import Authentification from "./Authentification";
 import { CurrProfile } from "../types/currProfile";
 import { CurrProfileContext } from "../context/userContext";
+import UserMenuNavBar from "./UserMenuNav.component";
 
 function NavBar() {
-    const [shown, setShown] = useState(false);
+    const [showAuthMenu, setShowAuthMenu] = useState(false);
     const [authIsSignUp, setAuthIsSignUp] = useState(true);
     const [currProfile, setCurrProfile] = useContext(CurrProfileContext);
 
     const signUptoggleAuthVisibility = () => {
         setAuthIsSignUp(true);
-        setShown(!shown);
+        setShowAuthMenu(!showAuthMenu);
     };
 
     const signIntoggleAuthVisibility = () => {
         setAuthIsSignUp(false);
-        setShown(!shown);
+        setShowAuthMenu(!showAuthMenu);
     };
 
     return (
@@ -46,11 +47,7 @@ function NavBar() {
                         </Link>
                     </li>
                     {currProfile.isLoggedIn ? (
-                        <li className={styles.li}>
-                            <a className={styles.link}>
-                                login: {currProfile.login}
-                            </a>
-                        </li>
+                        <UserMenuNavBar />
                     ) : (
                         <>
                             <li className={styles.li}>
@@ -73,11 +70,11 @@ function NavBar() {
                     )}
                 </ul>
             </nav>
-            {shown ? (
+            {showAuthMenu ? (
                 <Authentification
                     signingUp={authIsSignUp}
-                    shown={shown}
-                    setShown={setShown}
+                    shown={showAuthMenu}
+                    setShown={setShowAuthMenu}
                 />
             ) : null}
         </>

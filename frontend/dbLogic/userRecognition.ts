@@ -27,6 +27,7 @@ const sendUserCreationRequestToAPI = async (
             mutation createNewUser($input: UserCreationInput!) {
                 createUser(input: $input) {
                     login
+                    id
                 }
             }
         `,
@@ -48,6 +49,7 @@ const sendUserVerificationRequestToAPI = async (
             query findUserByCredentials($login: String!, $password: String!) {
                 findOneUserByCredentials(login: $login, password: $password) {
                     login
+                    id
                 }
             }
         `,
@@ -63,6 +65,7 @@ const setNewCurrProfile = (responseAPI: UserLogin, currProfile: CurrProfile) => 
     const loggedInProfile: CurrProfile = {
         isLoggedIn: true,
         login: responseAPI.login,
+        id: responseAPI.id,
     }
     return loggedInProfile;
 }
@@ -74,7 +77,7 @@ export const handleUserRegistration = async (
 ) => {
     const userData: UserSubmit = initUserSubmitEvent(event);
     const responseAPI = await sendUserCreationRequestToAPI(userData);
-    if (responseAPI.login) {
+    if (responseAPI.id) {
         return setNewCurrProfile(responseAPI, currProfile);
     } else {
         setError(true);
@@ -89,7 +92,7 @@ export const handleUserConnection = async (
 ) => {
     const userData: UserSubmit = initUserSubmitEvent(event);
     const responseAPI = await sendUserVerificationRequestToAPI(userData);
-    if (responseAPI.login) {
+    if (responseAPI.id) {
         const newProfile = setNewCurrProfile(responseAPI, currProfile);
         return newProfile;
     } else {

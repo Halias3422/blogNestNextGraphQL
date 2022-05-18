@@ -14,6 +14,7 @@ import {
     handleUserConnection,
     handleUserRegistration,
 } from "../dbLogic/userRecognition";
+import { LocalStorageLoggedInUserKey } from "../pages/_app";
 import styles from "../styles/Authentification.module.css";
 import { CurrProfile } from "../types/currProfile";
 
@@ -27,9 +28,9 @@ function Authentification({
     setShown: Dispatch<SetStateAction<boolean>>;
 }) {
     const [currProfile, setCurrProfile] = useContext(CurrProfileContext);
-    console.log("DEBUT CURR PROFILE = ", currProfile);
     let contextText: string = "Sign Up";
     let clickCount: number = 0;
+
     if (!signingUp) {
         contextText = "Sign In";
     }
@@ -38,37 +39,61 @@ function Authentification({
     const [errorSignIn, setErrorSignIn] = useState(false);
     const popUp = useRef<HTMLDivElement>(null);
 
-    const toggleVisibility = useCallback(() => {
-        document.body.style.overflow = "auto";
+    const closePopUp = () => {
+        document.body.style.overflow = 'auto';
         setShown(false);
+    }
+
+    const toggleVisibility = useCallback(() => {
+        closePopUp();
     }, [setShown]);
 
     useEffect(() => {
-        function handleClick(event: MouseEvent) {
-            // CORRECT CLICKCOUNT FOR PRODUCTION (SET TO 2 BECAUSE OF REACTSTRICTCODE)
+        window.addEventListener('click', (event: MouseEvent) => {
             if (
                 clickCount >= 2 &&
                 shown &&
                 popUp.current &&
                 !popUp.current.contains(event.target as Node)
             ) {
-                document.body.style.overflow = "auto";
-                setShown(false);
+                closePopUp();
             }
             clickCount += 1;
-        }
-        window.addEventListener("click", handleClick);
+        })
+
+        window.addEventListener('keydown', (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                closePopUp();
+            }
+        })
     });
 
     async function handleUserSubmit(event: FormEvent<HTMLFormElement>) {
+        let userProfile: CurrProfile;
+
         if (signingUp) {
             setCurrProfile(
-                await handleUserRegistration(event, setErrorSignUp, currProfile)
+                (userProfile = await handleUserRegistration(
+                    event,
+                    setErrorSignUp,
+                    currProfile
+                ))
             );
         } else {
             setCurrProfile(
-                await handleUserConnection(event, setErrorSignIn, currProfile)
+                (userProfile = await handleUserConnection(
+                    event,
+                    setErrorSignIn,
+                    currProfile
+                ))
             );
+        }
+        if (userProfile && userProfile.isLoggedIn && userProfile.id) {
+            localStorage.setItem(
+                LocalStorageLoggedInUserKey,
+                JSON.stringify(userProfile)
+            );
+            toggleVisibility();
         }
     }
 
@@ -89,9 +114,7 @@ function Authentification({
                     <h1 className={styles.title}>{contextText}</h1>
                 </div>
                 <form
-                    onSubmit={async (event) =>
-                        await handleUserSubmit(event)
-                    } 
+                    onSubmit={async (event) => await handleUserSubmit(event)}
                     className={styles.authForm}
                     id="submitForm"
                 >
@@ -131,12 +154,12 @@ function Authentification({
                         <p className={`${styles.textForm} ${styles.errorMsg}`}>
                             ERROR: Login already taken.
                         </p>
-                    ) : null}
+                    ) : <p></p>}
                     {errorSignIn ? (
                         <p className={`${styles.textForm} ${styles.errorMsg}`}>
                             ERROR: Wrong login or password
                         </p>
-                    ) : null}
+                    ) : <p></p>}
                 </form>
             </div>
         </div>

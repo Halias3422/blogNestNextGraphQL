@@ -13,4 +13,5 @@ export type ConnectedUser = {
 
 export type UserLogin = {
     login: string,
+    id: string,
 }

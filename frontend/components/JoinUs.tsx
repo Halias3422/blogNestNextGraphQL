@@ -5,7 +5,7 @@ import Authentification from './Authentification';
 
 function JoinUs() {
     const [signUpVisibility, setSignUpVisibility] = useState(false);
-
+    
     const toggleAuthVisibility = () => {
         setSignUpVisibility(!signUpVisibility);
     }
