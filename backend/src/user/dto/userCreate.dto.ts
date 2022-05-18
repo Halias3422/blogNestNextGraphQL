@@ -1,4 +1,5 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
+import { StringValueNode } from 'graphql';
 import { Article } from 'src/article/models/article.model';
 import { User } from '../models/user.model';
 
@@ -25,6 +26,9 @@ export class UserCreationInput {
 
 @ObjectType()
 export class UserOutput {
+  @Field(() => String, {nullable: true })
+  login: string; 
+
   @Field(() => String, { nullable: true })
-  login: string;
+  id: string;
 }

@@ -15,9 +15,10 @@ export class UserMutationsResolver {
         if (res) {
             // throw new Error('Login already taken.');
             return {
-                login: res.login
+                login: res.login,
+                id: res.id
             }
         }
-        return null;
+        return {};
     }
 }

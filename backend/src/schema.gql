@@ -32,6 +32,7 @@ type User {
 
 type UserOutput {
   login: String
+  id: String
 }
 
 type Query {

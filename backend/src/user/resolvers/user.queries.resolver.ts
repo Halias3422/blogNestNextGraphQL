@@ -25,6 +25,7 @@ export class UserQueriesResolver {
         if (user) {
             return {
                 login: user.login,
+                id: user.id,
             };
         }
         return {};
