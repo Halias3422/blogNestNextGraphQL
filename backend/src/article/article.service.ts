@@ -1,5 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UserCreationInput, UserOutput } from 'src/user/dto/userCreate.dto';
+import { User } from 'src/user/models/user.model';
+import { UserMutationsResolver } from 'src/user/resolvers/user.mutations.resolver';
+import { UserService } from 'src/user/user.service';
 import { Repository } from 'typeorm';
 import { ArticleCreationInput } from './dto/articleCreate.dto';
 import { Article } from './models/article.model';
@@ -9,6 +13,7 @@ export class ArticleService {
   constructor(
     @InjectRepository(Article)
     private readonly articleRepository: Repository<Article>,
+    private readonly userService: UserService
   ) {
     this.initiateDBContentIfEmpty();
   }
@@ -64,7 +69,21 @@ export class ArticleService {
     return newsAPIJson.articles;
   }
 
+  async createNewsAPIFakeUser() {
+    const fakeUser: UserCreationInput = {
+      login: 'newsAPI',
+      password: 'newsAPI',
+    }
+    return await this.userService.createUser(fakeUser);
+  }
+
   async fillArticleDBWithFetchedData(articleJson) {
+    const authorNewsAPI: User = await this.createNewsAPIFakeUser();
+    const userOutput: UserOutput = {
+      id: authorNewsAPI.id,
+      login: authorNewsAPI.login,
+      
+    }
     for (let i = 0; i < articleJson.length; i++) {
       const newArticle: ArticleCreationInput = {
         title: articleJson[i].title,
@@ -73,6 +92,7 @@ export class ArticleService {
         content: articleJson[i].content,
         createdAt: articleJson[i].publishedAt,
         lastUpdatedAt: articleJson[i].publishedAt,
+        author: userOutput,
       };
       await this.createArticle(newArticle);
     }

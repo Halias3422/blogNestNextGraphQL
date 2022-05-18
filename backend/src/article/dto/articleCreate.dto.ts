@@ -1,5 +1,5 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
-import { Article } from '../models/article.model';
+import { Author } from 'src/user/dto/userCreate.dto';
 
 @InputType()
 export class ArticleCreationInput {
@@ -18,8 +18,8 @@ export class ArticleCreationInput {
   @Field(() => String)
   image: string;
 
-  // @Field(() => User)
-  // author?: User;
+   @Field(() => Author)
+   author: Author;
 
   @Field(() => Date, { nullable: true })
   createdAt?: Date;

@@ -20,8 +20,14 @@ export class UserCreationInput {
   @Field(() => Date, { nullable: true })
   createdAccountOn?: Date;
 
-  // @Field(() => [Article], {nullable: true})
-  // articlesCreated?: Article[];
+   @Field(() => [Article], {nullable: true})
+   articlesCreated?: Article[];
+}
+
+@InputType()
+export class Author {
+  @Field(() => ID)
+  id: string;
 }
 
 @ObjectType()

@@ -1,10 +1,12 @@
-import { Field, ID, ObjectType } from "@nestjs/graphql";
+import { Field, ID, InputType, ObjectType } from "@nestjs/graphql";
+import { ArticleCreationInput } from "src/article/dto/articleCreate.dto";
 import { Article } from "src/article/models/article.model";
 import { BaseEntity, Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity()
-@ObjectType()
-export class User extends BaseEntity {
+@InputType('UserInput')
+@Entity('UserEntity')
+@ObjectType('UserObject')
+export class User {
     @Field(() => ID)
     @PrimaryGeneratedColumn('uuid')
     id: string;
@@ -13,11 +15,9 @@ export class User extends BaseEntity {
     @Column()
     login: string;
 
-    @Field(() => String)
     @Column()
     salt: string;
 
-    @Field(() => Date)
     @Column()
     password: string;
 
@@ -25,7 +25,6 @@ export class User extends BaseEntity {
     @Column()
     createdAccountOn: Date;
 
-    @Field(() => [Article])
-    @OneToMany(() => Article, article => article.id)
+    @OneToMany('Article', (article: Article) => article.author, { nullable: true})
     articlesCreated: Article[];
 }

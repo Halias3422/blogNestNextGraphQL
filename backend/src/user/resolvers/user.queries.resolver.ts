@@ -30,5 +30,8 @@ export class UserQueriesResolver {
         }
         return {};
     }
-
+  @Query(() => String)
+  sayHello(): string {
+    return 'Hello coco!';
+  }
 }

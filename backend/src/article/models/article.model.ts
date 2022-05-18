@@ -1,9 +1,11 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
+import { User } from 'src/user/models/user.model';
 // import { User } from 'src/user/models/user.model';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
-@ObjectType()
+@InputType('ArticleInput')
+@Entity('ArticleEntity')
+@ObjectType('ArticleObject')
 export class Article {
   @Field(() => ID)
   @PrimaryGeneratedColumn('uuid')
@@ -25,9 +27,9 @@ export class Article {
   @Column()
   image: string;
 
-  // @Field(() => User)
-  // @ManyToOne(() => User, user => user.articlesCreated)
-  // author: User;
+  @Field(() => User)
+  @ManyToOne(() => User, (user) => user.articlesCreated)
+  author: User;
 
   @Field(() => Date)
   @Column()

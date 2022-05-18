@@ -2,14 +2,10 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Article {
+type UserObject {
   id: ID!
-  title: String!
-  description: String!
-  content: String!
-  image: String!
-  createdAt: DateTime!
-  lastUpdatedAt: DateTime!
+  login: String!
+  createdAccountOn: DateTime!
 }
 
 """
@@ -17,17 +13,15 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type ArticleCreationOutput {
-  articleCreated: Boolean!
-}
-
-type User {
+type ArticleObject {
   id: ID!
-  login: String!
-  salt: String!
-  password: DateTime!
-  createdAccountOn: DateTime!
-  articlesCreated: [Article!]!
+  title: String!
+  description: String!
+  content: String!
+  image: String!
+  author: UserObject!
+  createdAt: DateTime!
+  lastUpdatedAt: DateTime!
 }
 
 type UserOutput {
@@ -35,11 +29,32 @@ type UserOutput {
   id: String
 }
 
+type ArticleCreationOutput {
+  articleCreated: Boolean!
+}
+
+input UserInput {
+  id: ID!
+  login: String!
+  createdAccountOn: DateTime!
+}
+
+input ArticleInput {
+  id: ID!
+  title: String!
+  description: String!
+  content: String!
+  image: String!
+  author: UserInput!
+  createdAt: DateTime!
+  lastUpdatedAt: DateTime!
+}
+
 type Query {
-  returnOneArticle(id: ID!): Article!
-  returnAllArticles: [Article!]!
+  returnOneArticle(id: ID!): ArticleObject!
+  returnAllArticles: [ArticleObject!]!
   sayHello: String!
-  returnOneUserById: User!
+  returnOneUserById: UserObject!
   returnAllUsers: [UserOutput!]!
   findOneUserByCredentials(login: String!, password: String!): UserOutput!
 }
@@ -55,8 +70,13 @@ input ArticleCreationInput {
   description: String!
   content: String!
   image: String!
+  author: Author!
   createdAt: DateTime
   lastUpdatedAt: DateTime
+}
+
+input Author {
+  id: ID!
 }
 
 input UserCreationInput {
@@ -65,4 +85,5 @@ input UserCreationInput {
   salt: String
   password: String!
   createdAccountOn: DateTime
+  articlesCreated: [ArticleInput!]
 }
