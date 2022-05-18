@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             const loggedInUserJson = JSON.parse(loggedInUserString);
             setCurrProfile(loggedInUserJson);
         }
-    }, []);
+    }, [setCurrProfile]);
 
     return (
         <>

@@ -22,7 +22,7 @@
 
 .li {
     font-size: 20px;
-    padding-left: 5%;
+    padding-left: 30px;
 }
 
 .link {
@@ -40,7 +40,7 @@
     margin-right: 5%;
 }
 
-.getStarted {
+.getStarted, .newArticle {
     background-color: #191919;
     border-radius: 23px;
     padding-top: 12px;
@@ -50,3 +50,8 @@
     color: #ffffff;
     cursor: pointer;
 } 
+
+.newArticle {
+    background-color: #ffffff;
+    color: #191919;
+}

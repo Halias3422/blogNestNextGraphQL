@@ -16,15 +16,18 @@ import { useContext, useEffect, useState } from "react";
 function Home({ articleList }: { articleList: Article[] }) {
     const [currProfile, setCurrProfile] = useContext(CurrProfileContext);
     const [viewJoinUs, setViewJoinUs] = useState(true);
+    const [render ,setRender] = useState(false);
 
     useEffect(() => {
         if (currProfile && currProfile.isLoggedIn) {
             setViewJoinUs(false);
+            setRender(true);
         }
-    });
+    }, [setViewJoinUs, currProfile]);
     return (
         <>
-            {viewJoinUs ? <JoinUs /> : null}
+        {render ? 
+            (viewJoinUs ? <JoinUs /> : null) : null }
             <IndexContent articleList={articleList} />
         </>
     );
