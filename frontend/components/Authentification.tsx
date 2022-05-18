@@ -39,17 +39,18 @@ function Authentification({
     const [errorSignIn, setErrorSignIn] = useState(false);
     const popUp = useRef<HTMLDivElement>(null);
 
-    const closePopUp = () => {
-        document.body.style.overflow = 'auto';
+    const closePopUp = useCallback(() => {
+        document.body.style.overflow = "auto";
         setShown(false);
-    }
+    }, [setShown]);
 
     const toggleVisibility = useCallback(() => {
         closePopUp();
-    }, [setShown]);
+    }, [closePopUp]);
 
     useEffect(() => {
-        window.addEventListener('click', (event: MouseEvent) => {
+        //CORRECT CLICKCONT FOR PRODUCTION (SET TO 2 BECAUSE OF REACTSTRICTCODE)
+        window.addEventListener("click", (event: MouseEvent) => {
             if (
                 clickCount >= 2 &&
                 shown &&
@@ -59,13 +60,13 @@ function Authentification({
                 closePopUp();
             }
             clickCount += 1;
-        })
+        });
 
-        window.addEventListener('keydown', (event: KeyboardEvent) => {
-            if (event.key === 'Escape') {
+        window.addEventListener("keydown", (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
                 closePopUp();
             }
-        })
+        });
     });
 
     async function handleUserSubmit(event: FormEvent<HTMLFormElement>) {
@@ -154,12 +155,16 @@ function Authentification({
                         <p className={`${styles.textForm} ${styles.errorMsg}`}>
                             ERROR: Login already taken.
                         </p>
-                    ) : <p></p>}
+                    ) : (
+                        <p></p>
+                    )}
                     {errorSignIn ? (
                         <p className={`${styles.textForm} ${styles.errorMsg}`}>
                             ERROR: Wrong login or password
                         </p>
-                    ) : <p></p>}
+                    ) : (
+                        <p></p>
+                    )}
                 </form>
             </div>
         </div>

@@ -26,7 +26,7 @@ function UserMenuPopUp({
     }
 
     useEffect(() => {
-        function handleClick(event: MouseEvent) {
+        window.addEventListener('click', (event: MouseEvent) => {
             //CORRECT CLICKCONT FOR PRODUCTION (SET TO 2 BECAUSE OF REACTSTRICTCODE)
             if (
                 clickCount >= 2 &&
@@ -34,13 +34,17 @@ function UserMenuPopUp({
                 popUp.current &&
                 !popUp.current.contains(event.target as Node)
             ) {
-                console.log("ici");
                 setShown(false);
             }
             clickCount += 1;
-        }
-        window.addEventListener("click", handleClick);
+        })
+        window.addEventListener('keydown', (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                setShown(false);
+            }
+        })
     });
+
     return (
         <div ref={popUp} className={styles.globalContainer}>
             <a className={styles.listElement}>Place Holder</a>
