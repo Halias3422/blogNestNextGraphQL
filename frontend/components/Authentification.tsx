@@ -1,6 +1,7 @@
 import Image from "next/image";
 import {
     Dispatch,
+    FormEvent,
     SetStateAction,
     useCallback,
     useContext,
@@ -59,6 +60,18 @@ function Authentification({
         window.addEventListener("click", handleClick);
     });
 
+    async function handleUserSubmit(event: FormEvent<HTMLFormElement>) {
+        if (signingUp) {
+            setCurrProfile(
+                await handleUserRegistration(event, setErrorSignUp, currProfile)
+            );
+        } else {
+            setCurrProfile(
+                await handleUserConnection(event, setErrorSignIn, currProfile)
+            );
+        }
+    }
+
     return (
         <div className={styles.globalContainer}>
             <div ref={popUp} className={styles.iframe}>
@@ -77,22 +90,8 @@ function Authentification({
                 </div>
                 <form
                     onSubmit={async (event) =>
-                        signingUp
-                            ? setCurrProfile(
-                                  await handleUserRegistration(
-                                      event,
-                                      setErrorSignUp,
-                                      currProfile
-                                  )
-                              )
-                            : setCurrProfile(
-                                  await handleUserConnection(
-                                      event,
-                                      setErrorSignIn,
-                                      currProfile
-                                  )
-                              )
-                    }
+                        await handleUserSubmit(event)
+                    } 
                     className={styles.authForm}
                     id="submitForm"
                 >
@@ -128,7 +127,6 @@ function Authentification({
                     >
                         {contextText}
                     </button>
-                    <p>login = {currProfile.login}</p>
                     {errorSignUp ? (
                         <p className={`${styles.textForm} ${styles.errorMsg}`}>
                             ERROR: Login already taken.

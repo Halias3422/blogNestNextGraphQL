@@ -27,7 +27,7 @@ export class UserQueriesResolver {
                 login: user.login,
             };
         }
-        return null;
+        return {};
     }
 
 }

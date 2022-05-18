@@ -6,8 +6,4 @@ const currProfileEmpty: CurrProfile = {
     login: null,
 };
 
-// export const CurrProfileContext = createContext<
-//     [CurrProfile, Dispatch<SetStateAction<CurrProfile>>] | null
-// >(null);
-
 export const CurrProfileContext = createContext<[CurrProfile, Dispatch<SetStateAction<CurrProfile>>]>({} as any);

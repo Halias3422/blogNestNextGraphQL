@@ -74,7 +74,7 @@ export const handleUserRegistration = async (
 ) => {
     const userData: UserSubmit = initUserSubmitEvent(event);
     const responseAPI = await sendUserCreationRequestToAPI(userData);
-    if (responseAPI) {
+    if (responseAPI.login) {
         return setNewCurrProfile(responseAPI, currProfile);
     } else {
         setError(true);
@@ -89,9 +89,8 @@ export const handleUserConnection = async (
 ) => {
     const userData: UserSubmit = initUserSubmitEvent(event);
     const responseAPI = await sendUserVerificationRequestToAPI(userData);
-    if (responseAPI) {
+    if (responseAPI.login) {
         const newProfile = setNewCurrProfile(responseAPI, currProfile);
-        console.log('return new Profile', newProfile);
         return newProfile;
     } else {
         setError(true);
