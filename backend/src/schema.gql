@@ -35,12 +35,13 @@ type Query {
   findAllArticles: [ArticleOutput!]!
   findOneUserById(id: ID!): UserOutput!
   findAllUsers: [UserOutput!]!
+  findOneUserByCredentials(login: String!, password: String!): UserOutput!
 }
 
 type Mutation {
   createNewArticle(newArticle: ArticleCreationPublicInput!): Boolean!
   deleteOneArticleById(articleId: ID!): Boolean!
-  createNewUser(newUser: UserCreationInput!): Boolean!
+  createNewUser(newUser: UserCreationInput!): UserOutput!
   deleteOneUserById(userId: ID!): Boolean!
 }
 

@@ -3,6 +3,7 @@
     padding-right: 16%;
     height: 1000px;
     margin: 0 auto;
+    padding-top: 75px;
     display: flex;
     flex-direction: row;
 }
@@ -30,8 +31,6 @@
 }
 
 .articleContentContainer {
-    height: 1000px;
-    overflow: hidden;
 
 }
 

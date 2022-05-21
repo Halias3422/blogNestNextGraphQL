@@ -5,11 +5,12 @@ import ArticlePreview from "./ArticlePreview";
 
 function ArticleList({ articleList }: { articleList: Article[] }) {
     const router: NextRouter = useRouter();
+    const articleFetched: boolean = articleList && articleList.length ? true : false;
     return (
         <div className={styles.articleListContainer}>
-            {articleList.map((article: Article) => (
+            {articleFetched ? articleList.map((article: Article) => (
                <ArticlePreview article={article} articleList={articleList} key={article.id}/> 
-            ))}
+            )) : <></>}
         </div>
     )
 }

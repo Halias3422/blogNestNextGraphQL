@@ -1,1 +1,0 @@
-{"version":"0.1.0","name":"frontend","dependencies":{"@apollo/client":{"version":"3.6.2"},"graphql":{"version":"16.5.0"},"next":{"version":"12.1.6"},"react-dom":{"version":"18.1.0"},"react":{"version":"18.1.0"}}}

@@ -47,7 +47,10 @@ export class ArticleService {
                 id: articleId,
             },
         });
-        return this.fromSingleArticleEntityToArticleOutput(articleEntity);
+        if (articleEntity !== undefined) {
+            return this.fromSingleArticleEntityToArticleOutput(articleEntity);
+        }
+        return undefined;
     }
 
     async findAllArticles(): Promise<ArticleOutput[]> {

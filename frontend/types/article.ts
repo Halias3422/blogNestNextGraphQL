@@ -1,8 +1,11 @@
+import { UserLogin } from "./user"
+
 export type Article = {
     id: string,
     title: string,
     description: string,
     image: string,
+    author: UserLogin,
     content: string,
     createdAt: Date,
     lastUpdatedAt: Date

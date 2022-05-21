@@ -1,35 +1,33 @@
 import {
-    Column,
-    CreateDateColumn,
-    Entity,
-    Generated,
-    OneToMany,
-    PrimaryGeneratedColumn,
+	Column,
+	CreateDateColumn,
+	Entity,
+	OneToMany,
+	PrimaryGeneratedColumn
 } from 'typeorm';
 import { ArticleEntity } from '../../articles/model/article.entity';
 
 @Entity('Users')
 export class UserEntity {
-    @PrimaryGeneratedColumn('uuid')
-    id?: string;
+	@PrimaryGeneratedColumn('uuid')
+	id?: string;
 
-    @Column()
-    login: string;
+	@Column()
+	login: string;
 
-    @Column()
-    @Generated('uuid')
-    salt: string;
+	@Column()
+	salt: string;
 
-    @Column()
-    password: string;
+	@Column()
+	password: string;
 
-    @CreateDateColumn()
-    createdAt?: Date;
+	@CreateDateColumn()
+	createdAt?: Date;
 
-    @OneToMany(
-        () => ArticleEntity,
-        (article: ArticleEntity) => article.author,
-        { nullable: true },
-    )
-    articlesPublished: ArticleEntity[];
+	@OneToMany(
+		() => ArticleEntity,
+		(article: ArticleEntity) => article.author,
+		{ nullable: true }
+	)
+	articlesPublished: ArticleEntity[];
 }

@@ -1,4 +1,5 @@
 import { Args, ID, Mutation, Resolver } from '@nestjs/graphql';
+import { UserOutput } from '../dtos/user.object.dto';
 import UserCreationInput from '../dtos/userCreation.dto';
 import { UserEntity } from '../model/user.entity';
 import { UserService } from '../user.service';
@@ -7,12 +8,16 @@ import { UserService } from '../user.service';
 export default class UserMutationsResolver {
     constructor(private readonly userService: UserService) {}
 
-    @Mutation(() => Boolean)
+    @Mutation(() => UserOutput)
     async createNewUser(
         @Args({ name: 'newUser', type: () => UserCreationInput })
         newUser: UserCreationInput,
-    ): Promise<boolean> {
-        return await this.userService.createNewUser(newUser);
+    ): Promise<UserOutput> {
+        const newUserCreated = await this.userService.createNewUser(newUser);
+        if (!newUserCreated.id) {
+            throw new Error('User couldn\'t be created');
+        }
+        return newUserCreated;
     }
 
     @Mutation(() => Boolean)
