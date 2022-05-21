@@ -4,12 +4,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ArticleModule } from './article/article.module';
-import { Article } from './article/models/article.model';
-import { User } from './user/models/user.model';
-import { UserModule } from './user/user.module';
+import { ArticlesModule } from './articles/articles.module';
+import { ArticleEntity } from './articles/model/article.entity';
+import { UsersModule } from './users/user.module';
+import { UserEntity } from './users/model/user.entity';
+import { InitiateDBService } from './initiateDBContent/initiateDB.service';
 
 @Module({
     imports: [
@@ -28,14 +28,13 @@ import { UserModule } from './user/user.module';
                 database: configService.get('DB_NAME'),
                 username: configService.get('DB_USER'),
                 password: configService.get('DB_PASSWORD'),
-                entities: [User, Article],
+                entities: [UserEntity, ArticleEntity],
                 synchronize: true,
             }),
         }),
-        ArticleModule,
-        UserModule,
+        ArticlesModule,
+        UsersModule,
     ],
-    controllers: [AppController],
-    providers: [AppService],
+    providers: [AppService, InitiateDBService],
 })
 export class AppModule {}

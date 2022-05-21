@@ -2,10 +2,15 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type UserObject {
+type ArticleOutput {
   id: ID!
-  login: String!
-  createdAccountOn: DateTime!
+  title: String!
+  description: String!
+  content: String!
+  image: String!
+  author: AuthorOutput!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 """
@@ -13,77 +18,41 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type ArticleObject {
-  id: ID!
-  title: String!
-  description: String!
-  content: String!
-  image: String!
-  author: UserObject!
-  createdAt: DateTime!
-  lastUpdatedAt: DateTime!
-}
-
 type UserOutput {
-  login: String
-  id: String
-}
-
-type ArticleCreationOutput {
-  articleCreated: Boolean!
-}
-
-input UserInput {
   id: ID!
   login: String!
-  createdAccountOn: DateTime!
+  createdAt: DateTime!
+  articlesPublished: [ArticleOutput!]
 }
 
-input ArticleInput {
+type AuthorOutput {
   id: ID!
-  title: String!
-  description: String!
-  content: String!
-  image: String!
-  author: UserInput!
-  createdAt: DateTime!
-  lastUpdatedAt: DateTime!
+  login: String!
 }
 
 type Query {
-  returnOneArticle(id: ID!): ArticleObject!
-  returnAllArticles: [ArticleObject!]!
-  sayHello: String!
-  returnOneUserById: UserObject!
-  returnAllUsers: [UserOutput!]!
-  findOneUserByCredentials(login: String!, password: String!): UserOutput!
+  findOneArticleById(id: ID!): ArticleOutput!
+  findAllArticles: [ArticleOutput!]!
+  findOneUserById(id: ID!): UserOutput!
+  findAllUsers: [UserOutput!]!
 }
 
 type Mutation {
-  createArticle(input: ArticleCreationInput!): ArticleCreationOutput!
-  createUser(input: UserCreationInput!): UserOutput!
+  createNewArticle(newArticle: ArticleCreationPublicInput!): Boolean!
+  deleteOneArticleById(articleId: ID!): Boolean!
+  createNewUser(newUser: UserCreationInput!): Boolean!
+  deleteOneUserById(userId: ID!): Boolean!
 }
 
-input ArticleCreationInput {
-  id: ID
+input ArticleCreationPublicInput {
   title: String!
   description: String!
   content: String!
   image: String!
-  author: Author!
-  createdAt: DateTime
-  lastUpdatedAt: DateTime
-}
-
-input Author {
-  id: ID!
+  authorId: String!
 }
 
 input UserCreationInput {
-  id: ID
   login: String!
-  salt: String
   password: String!
-  createdAccountOn: DateTime
-  articlesCreated: [ArticleInput!]
 }
