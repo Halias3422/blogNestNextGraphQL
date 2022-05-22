@@ -27,6 +27,7 @@ export class UserService {
 				description: article.description,
 				content: article.content,
 				image: article.image,
+				category: article.category,
 				author: {
 					id: author.id,
 					login: author.login

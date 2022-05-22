@@ -18,6 +18,9 @@ export default class ArticleOutput {
     @Field(() => String)
     image: string;
 
+	@Field(() => String)
+	category: string;
+
     @Field(() => AuthorOutput)
     author: AuthorOutput;
 

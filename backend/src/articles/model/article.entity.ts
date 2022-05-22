@@ -26,6 +26,9 @@ export class ArticleEntity {
     @Column()
     image: string;
 
+	@Column()
+	category: string;
+
     @ManyToOne(() => UserEntity, (user: UserEntity) => user.articlesPublished, { eager: true })
     @JoinColumn()
     author: UserEntity;

@@ -8,6 +8,7 @@ type ArticleOutput {
   description: String!
   content: String!
   image: String!
+  category: String!
   author: AuthorOutput!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -39,7 +40,7 @@ type Query {
 }
 
 type Mutation {
-  createNewArticle(newArticle: ArticleCreationPublicInput!): Boolean!
+  createNewArticle(newArticle: ArticleCreationPublicInput!): ArticleOutput!
   deleteOneArticleById(articleId: ID!): Boolean!
   createNewUser(newUser: UserCreationInput!): UserOutput!
   deleteOneUserById(userId: ID!): Boolean!
@@ -50,6 +51,7 @@ input ArticleCreationPublicInput {
   description: String!
   content: String!
   image: String!
+  category: String!
   authorId: String!
 }
 

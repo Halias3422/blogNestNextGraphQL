@@ -90,7 +90,6 @@ export const handleUserRegistration = async (
 	const userData: UserSubmit = initUserSubmitEvent(event);
 	const responseAPI = await sendUserCreationRequestToAPI(userData);
 	if (responseAPI && responseAPI.id) {
-		console.log('ICIII');
 		setError(false);
 		return setNewCurrProfile(responseAPI);
 	} else {

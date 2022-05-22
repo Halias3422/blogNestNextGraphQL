@@ -15,6 +15,9 @@ export class ArticleCreationPublicInput {
     @Field(() => String)
     image: string;
 
+	@Field(() => String)
+	category: string;
+
     @Field(() => String)
     authorId: string;
 }
@@ -32,6 +35,9 @@ export class ArticleCreationPrivateInput {
 
     @Field(() => String)
     image: string;
+
+	@Field(() => String)
+	category: string;
 
     @Field(() => UserEntity)
     author: UserEntity;

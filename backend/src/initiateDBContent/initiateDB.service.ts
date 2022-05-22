@@ -12,7 +12,7 @@ export class InitiateDBService {
     constructor(
         private readonly articleService: ArticleService,
         private readonly userService: UserService) {
-        this.initiateDBContentIfEmpty()
+        this.initiateDBContentIfEmpty();
     }
 
     async initiateDBContentIfEmpty() {
@@ -80,6 +80,7 @@ export class InitiateDBService {
                 image: articleJson[i].urlToImage,
                 content: articleJson[i].content,
                 authorId: authorOutput.id,
+				category: 'placeholder1',
             };
             await this.articleService.createNewArticle(newArticle);
         }
