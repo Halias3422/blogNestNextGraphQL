@@ -7,59 +7,13 @@
 	font-size: 30px;
 	border: 1px solid black;
 	margin-bottom: 100px;
-}
-
-.articleForm {
-	margin: 100px;
-	margin-top: 50px;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 }
 
-.imageUrl {
-	font-size: 20px;
-	width: 100%;
-}
-
-.input {
-	font-size: 20px;
-	margin-top: 10px;
-	margin-bottom: 30px;
-}
-
-.divContainer {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	padding: 20px;
-	overflow: hidden;
-	border: 1px solid #191919;
-}
-
-.detailsContainer {
-}
-
-.articleContentContainer {
-	margin-top: 20px;
-}
-
-.articleText {
-	min-height: 200px;
-	max-width: 100%;
-}
-
-.articleSubmitContainer {
-	width: 100%;
-	margin-top: 20px;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: center;
-}
-
-.button {
-	font-size: 50px;
-	margin: 20px;
-	padding: 10px;
+.title {
+	width: fit-content;
+	margin: 0 auto;
+	margin-top: 100px;
+	padding-bottom: 100px;
 }

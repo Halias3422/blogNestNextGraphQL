@@ -1,58 +1,59 @@
 .globalContainer {
-    padding-left: 16%;
-    padding-right: 16%;
-    height: 1000px;
-    margin: 0 auto;
-    padding-top: 75px;
-    display: flex;
-    flex-direction: row;
+	padding-left: 16%;
+	padding-right: 16%;
+	height: 1000px;
+	margin: 0 auto;
+	padding-top: 75px;
+	display: flex;
+	flex-direction: row;
 }
 
 .articleContainer {
-    flex: 3;
-    display: flex;
-    flex-direction: column;
-    padding-left: 10%;
-    padding-right: 10%;
-    padding-top: 20px;
-    min-width: 600px;
-    border-left: 1px solid #e6e6e6;
-    border-right: 1px solid #e6e6e6;
+	flex: 3;
+	display: flex;
+	flex-direction: column;
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-top: 20px;
+	min-width: 600px;
+	border-left: 1px solid #e6e6e6;
+	border-right: 1px solid #e6e6e6;
 }
 
 .sideContainer {
-    flex: 1;
-    padding-left: 5%;
+	flex: 1;
+	padding-left: 5%;
 }
 
 .articleAuthorContainer {
-    height: 150px;
-
+	height: 150px;
 }
 
 .articleContentContainer {
-
 }
 
 .articleTitle {
-    text-align: left;
+	text-align: left;
 }
 
 .articleImg {
-    max-height: 100%;
-    max-width: 100%;
-    margin-top: 40px;
-    margin-bottom: 40px;
+	max-height: 100%;
+	max-width: 100%;
+	margin-top: 40px;
+	margin-bottom: 40px;
 }
 
 .articleDescription {
-    text-align: justify;
-    color: grey;
-    font-size: 14pt;
+	text-align: justify;
+	color: grey;
+	font-size: 14pt;
 }
 
 .articleContent {
-    text-align: justify;
-    font-size: 15pt;
+	text-align: justify;
+	font-size: 15pt;
+}
 
+.editArticle {
+	font-size: 13pt;
 }

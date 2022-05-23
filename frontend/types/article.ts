@@ -5,6 +5,7 @@ export type Article = {
 	title: string;
 	description: string;
 	image: string;
+	category: string;
 	author: UserLogin;
 	content: string;
 	createdAt: Date;

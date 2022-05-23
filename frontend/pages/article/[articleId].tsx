@@ -6,8 +6,11 @@ import {
 	retreiveAllArticlesFromDB,
 	retreiveArticleFromId
 } from '../../dbLogic/retreiveArticles';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { CurrProfileContext } from '../../context/userContext';
+import { userInfo } from 'os';
+import Link from 'next/link';
 
 function ArticleView({
 	article,
@@ -37,6 +40,26 @@ function ArticleView({
 		<div className={styles.globalContainer}>
 			<div className={styles.articleContainer}>
 				<div className={styles.articleAuthorContainer}>
+					{useContext(CurrProfileContext)[0] ? (
+						<button
+							className={styles.editArticle}
+							onClick={() =>
+								router.push({
+									pathname:
+										'/updateArticle/' +
+										encodeURIComponent(article.title) +
+										article.id,
+									query: {
+										article: article.id
+									}
+								})
+							}
+						>
+							Edit the article
+						</button>
+					) : (
+						<></>
+					)}
 					<h4>Written by {article.author.login}</h4>
 					<p>{'created: ' + readableDate}</p>
 				</div>

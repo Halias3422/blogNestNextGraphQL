@@ -51,7 +51,9 @@ function ArticlePreview({
 			}
 		>
 			<div className={styles.textContainer}>
-				<h4 className={styles.articleAuthor}>author name</h4>
+				<h4 className={styles.articleAuthor}>
+					By {article.author.login}
+				</h4>
 				<div className={styles.articleText}>
 					<h2
 						className={`${styles.articlePreview} ${styles.articleTitle}`}
