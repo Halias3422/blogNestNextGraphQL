@@ -1,31 +1,29 @@
-import { UserLogin } from './user';
+import { StringValueNode } from 'graphql';
+import { Author } from './user';
 
 export type Article = {
 	id: string;
 	title: string;
 	description: string;
+	content: string;
 	image: string;
 	category: string;
-	author: UserLogin;
-	content: string;
+	author: Author;
 	createdAt: Date;
 	updatedAt: Date;
 };
 
-export interface singleArticle {
-	registeredArticle: Article;
-}
-
-export interface HomeArticle {
-	articleList: Article;
-}
-
 export type ArticleForm = {
-	authorID: string | null;
+	authorId: string;
 	title: string;
 	description: string;
 	category: string;
 	image: string;
 	content: string;
-	createdAt: Date;
 };
+
+export type ArticleUpdateForm = {
+	id: string;
+	createdAt: Date;
+	updatedAt: Date;
+} & ArticleForm;

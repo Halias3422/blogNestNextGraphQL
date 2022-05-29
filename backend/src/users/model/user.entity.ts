@@ -12,6 +12,9 @@ export class UserEntity {
 	@PrimaryGeneratedColumn('uuid')
 	id?: string;
 
+	@Column({ nullable: true })
+	sessionToken?: string;
+
 	@Column()
 	login: string;
 

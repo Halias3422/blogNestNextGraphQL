@@ -6,7 +6,9 @@ import { UserService } from '../users/user.service';
 import ArticleOutput from './dtos/article.object.dto';
 import {
 	ArticleCreationPrivateInput,
-	ArticleCreationPublicInput
+	ArticleCreationPublicInput,
+	ArticleUpdatePrivateInput,
+	ArticleUpdatePublicInput
 } from './dtos/articleCreation.input.dto';
 import { ArticleEntity } from './model/article.entity';
 
@@ -50,7 +52,7 @@ export class ArticleService {
 		if (articleEntity !== undefined) {
 			return this.fromSingleArticleEntityToArticleOutput(articleEntity);
 		}
-		return undefined;
+		return <ArticleOutput>{};
 	}
 
 	async findAllArticles(): Promise<ArticleOutput[]> {
@@ -98,6 +100,43 @@ export class ArticleService {
 			await this.articleRepository.save(articleSaved);
 			const articleOutput = this.findOneArticleById(articleSaved.id);
 			return articleOutput;
+		}
+		return <ArticleOutput>{};
+	}
+
+	createArticlePrivateInputFromArticleUpdateInput(
+		article: ArticleUpdatePublicInput,
+		author: UserEntity
+	) {
+		const privateUpdateArticle: ArticleUpdatePrivateInput = {
+			id: article.id,
+			title: article.title,
+			description: article.description,
+			content: article.content,
+			image: article.image,
+			category: article.category,
+			author: author,
+			createdAt: article.createdAt,
+			updatedAt: article.updatedAt
+		};
+		return privateUpdateArticle;
+	}
+
+	async updateArticle(
+		articleToUpdate: ArticleUpdatePublicInput
+	): Promise<ArticleOutput> {
+		const author = await this.userService.findOneUserEntityById(
+			articleToUpdate.authorId
+		);
+		const originArticle = await this.findOneArticleById(articleToUpdate.id);
+		if (author !== undefined && originArticle != undefined) {
+			const privateUpdateArticle =
+				this.createArticlePrivateInputFromArticleUpdateInput(
+					articleToUpdate,
+					author
+				);
+			await this.articleRepository.save(privateUpdateArticle);
+			return await this.findOneArticleById(privateUpdateArticle.id);
 		}
 		return <ArticleOutput>{};
 	}

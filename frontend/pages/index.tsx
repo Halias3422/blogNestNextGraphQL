@@ -1,44 +1,18 @@
-import {
-	ApolloClient,
-	ApolloQueryResult,
-	gql,
-	InMemoryCache,
-	NormalizedCacheObject
-} from '@apollo/client';
-import IndexContent from '../components/IndexContent';
-import JoinUs from '../components/JoinUs';
-import { Article } from '../types/article';
-import { retreiveAllArticlesFromDB } from '../dbLogic/retreiveArticles';
-import { apiClient } from './_app';
-import { CurrProfileContext } from '../context/userContext';
-import { useContext, useEffect, useState } from 'react';
+import type { NextPage } from 'next';
+import { useContext, useEffect } from 'react';
+import ClientOnly from '../components/GlobalComponents/ClientOnly';
+import MainIndexView from '../components/IndexComponents/MainIndexView';
+import TrendingArticlesGrid from '../components/IndexComponents/TrendingArticles/TrendingArticlesContainer';
+import { CurrProfile } from '../types/user';
+import { CurrProfileContext, LocalStorageCurrSession } from './_app';
 
-function Home({ articleList }: { articleList: Article[] }) {
-	const [currProfile, setCurrProfile] = useContext(CurrProfileContext);
-	const [viewJoinUs, setViewJoinUs] = useState(true);
-	const [render, setRender] = useState(false);
-
-	useEffect(() => {
-		if (currProfile && currProfile.isLoggedIn) {
-			setViewJoinUs(false);
-		}
-		setRender(true);
-	}, [setViewJoinUs, currProfile]);
+const Home: NextPage = () => {
 	return (
-		<>
-			{render ? viewJoinUs ? <JoinUs /> : null : null}
-			<IndexContent articleList={articleList} />
-		</>
+		<main style={{ maxWidth: '100%' }}>
+			<TrendingArticlesGrid />
+			<MainIndexView />
+		</main>
 	);
-}
-
-export async function getServerSideProps() {
-	const articleList: Article[] = await retreiveAllArticlesFromDB(apiClient);
-	return {
-		props: {
-			articleList: articleList
-		}
-	};
-}
+};
 
 export default Home;

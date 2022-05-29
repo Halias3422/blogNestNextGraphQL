@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { pbkdf2Sync, randomBytes } from 'crypto';
+import { pbkdf2Sync, randomBytes, randomUUID } from 'crypto';
 import { Repository } from 'typeorm';
 import ArticleOutput from '../articles/dtos/article.object.dto';
 import { ArticleEntity } from '../articles/model/article.entity';
@@ -177,5 +177,25 @@ export class UserService {
 			}
 		}
 		return undefined;
+	}
+
+	async setUserSessionToken(userId: string): Promise<string> {
+		const foundUserInDB = await this.findOneUserEntityById(userId);
+		if (foundUserInDB !== undefined) {
+			foundUserInDB.sessionToken = randomUUID();
+			await this.usersRepository.save(foundUserInDB);
+			return foundUserInDB.sessionToken;
+		}
+		return undefined;
+	}
+
+	async deleteUserSessionToken(userId: string): Promise<boolean> {
+		const foundUserInDB = await this.findOneUserEntityById(userId);
+		if (foundUserInDB !== undefined) {
+			foundUserInDB.sessionToken = null;
+			await this.usersRepository.save(foundUserInDB);
+			return true;
+		}
+		return false;
 	}
 }

@@ -27,6 +27,9 @@ export default class UserQueriesResolver {
 			login,
 			password
 		);
+		if (!res.id) {
+			throw new Error('Error: User not found');
+		}
 		return res;
 	}
 }

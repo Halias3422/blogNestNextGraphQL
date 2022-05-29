@@ -42,8 +42,11 @@ type Query {
 type Mutation {
   createNewArticle(newArticle: ArticleCreationPublicInput!): ArticleOutput!
   deleteOneArticleById(articleId: ID!): Boolean!
+  updateArticle(articleToUpdate: ArticleUpdatePublicInput!): ArticleOutput!
   createNewUser(newUser: UserCreationInput!): UserOutput!
   deleteOneUserById(userId: ID!): Boolean!
+  setUserSessionToken(userId: ID!): String!
+  deleteUserSessionToken(userId: ID!): Boolean!
 }
 
 input ArticleCreationPublicInput {
@@ -53,6 +56,18 @@ input ArticleCreationPublicInput {
   image: String!
   category: String!
   authorId: String!
+}
+
+input ArticleUpdatePublicInput {
+  title: String!
+  description: String!
+  content: String!
+  image: String!
+  category: String!
+  authorId: String!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 input UserCreationInput {
