@@ -1,6 +1,7 @@
 import { styled, Typography } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Article } from '../../../../types/article';
+import { ReactEventHandler, SyntheticEvent } from 'react';
 
 const ARTICLE_PREVIEW_HEIGHT = '150px';
 
@@ -49,6 +50,7 @@ const ArticleDescription = styled(Typography)({
 
 const ArticleImage = styled('img')({
 	width: '200px',
+	minWidth: '200px',
 	height: ARTICLE_PREVIEW_HEIGHT,
 	objectFit: 'cover'
 });
@@ -60,6 +62,10 @@ const ArticleContainer = ({ article }: { article: Article }) => {
 			day: 'numeric'
 		}
 	);
+
+	const handleImageError = (event: SyntheticEvent) => {
+		(event.target as HTMLImageElement).src = '/imageNotFound.png';
+	};
 
 	return (
 		<ArticleContentContainer>
@@ -78,7 +84,11 @@ const ArticleContainer = ({ article }: { article: Article }) => {
 					{readableDate}
 				</Typography>
 			</ArticleTextContainer>
-			<ArticleImage src={article.image} alt={article.description} />
+			<ArticleImage
+				src={article.image}
+				onError={handleImageError}
+				alt={'/imageNotFound.png'}
+			/>
 		</ArticleContentContainer>
 	);
 };

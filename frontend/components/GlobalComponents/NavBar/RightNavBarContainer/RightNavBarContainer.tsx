@@ -44,10 +44,10 @@ const RightNavBarContainer = ({ props }: { props: Props }) => {
 
 	return (
 		<RightMenuContainer>
-			<MenuLink underline={'none'} href="/ourStory">
+			<MenuLink underline={'none'} href="/placeholder">
 				Our story
 			</MenuLink>
-			<MenuLink underline={'none'} href="/membership">
+			<MenuLink underline={'none'} href="/placeholder">
 				Membership
 			</MenuLink>
 			{currProfile.sessionChecked ? (
